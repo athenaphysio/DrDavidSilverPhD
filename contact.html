@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get in Touch — Dr David Silver PhD</title>
+<meta name="description" content="Contact Dr David Silver PhD — for speaking bookings, expert witness instructions, corporate wellbeing enquiries, or a simple conversation about the work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson:      #9B1C1C;
+    --dark-crimson: #6B1111;
+    --charcoal:     #1C1C1C;
+    --cream:        #F2EDE4;
+    --light-cream:  #F8F5F0;
+    --stone:        #4A4540;
+    --muted:        #7A716A;
+    --border:       #D4C9B8;
+    --white:        #FAFAF8;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans:  'DM Sans', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--charcoal); font-family: var(--sans); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+  .eyebrow { font-family: var(--sans); font-size: .75rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--crimson); margin-bottom: .75rem; }
+  .ruled { display: flex; align-items: center; gap: 1rem; }
+  .ruled::before { content: ''; flex: 1; max-width: 2.5rem; height: 1px; background: var(--crimson); }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* NAV */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,249,248,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: .9rem 0; }
+  .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.07); }
+  .nav-inner { max-width: 1160px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--charcoal); }
+  .nav-brand span { color: var(--crimson); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { font-size: .82rem; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; color: var(--stone); transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--crimson); }
+  .nav-cta { font-size: .78rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: .5rem 1.25rem; border: 1.5px solid var(--crimson); color: var(--crimson); transition: all .2s; border-radius: 2px; }
+  .nav-cta:hover { background: var(--crimson); color: var(--white); }
+  @media(max-width:900px){ .nav-links { display: none; } }
+
+  /* HERO */
+  .page-hero {
+    min-height: 52vh; display: flex; align-items: flex-end; padding-top: 5rem;
+    background: linear-gradient(160deg, var(--charcoal) 0%, #2A1A1A 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-word { position: absolute; right: -1rem; bottom: -2rem; font-family: var(--serif); font-size: 22vw; font-weight: 300; color: rgba(255,255,255,.03); line-height: 1; pointer-events: none; }
+  .page-hero-inner { position: relative; z-index: 1; padding: 0 2rem 4rem; max-width: 1160px; margin: 0 auto; width: 100%; }
+  .breadcrumb { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(250,249,248,.35); margin-bottom: 1.5rem; }
+  .breadcrumb a { color: rgba(250,249,248,.35); }
+  .breadcrumb a:hover { color: rgba(250,249,248,.7); }
+  .page-hero h1 { font-family: var(--serif); font-size: clamp(2.8rem, 5.5vw, 4.8rem); font-weight: 300; color: var(--white); line-height: 1.05; max-width: 700px; margin-bottom: 1.25rem; }
+  .page-hero h1 em { font-style: italic; color: var(--crimson); }
+  .page-hero .hero-sub { font-size: 1rem; line-height: 1.75; color: rgba(250,249,248,.6); max-width: 500px; }
+
+  /* CONTACT BODY */
+  .contact-body { padding: 6rem 0; background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 6rem; align-items: start; }
+
+  /* LEFT — routes */
+  .contact-routes {}
+  .route-card {
+    padding: 2rem; margin-bottom: 1.5rem;
+    border: 1px solid var(--border); background: var(--light-cream);
+    transition: border-color .2s, box-shadow .2s;
+    cursor: default;
+  }
+  .route-card:hover { border-color: var(--crimson); box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+  .route-card .route-num { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--crimson); margin-bottom: .5rem; }
+  .route-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; color: var(--charcoal); margin-bottom: .4rem; }
+  .route-card p { font-size: .87rem; line-height: 1.75; color: var(--stone); margin-bottom: 1rem; }
+  .route-card .route-link { font-size: .77rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--crimson); display: inline-flex; align-items: center; gap: .4rem; transition: gap .2s; }
+  .route-card .route-link:hover { gap: .7rem; }
+  .route-card .route-link::after { content: '→'; }
+
+  /* Quick contact details */
+  .contact-detail-block { margin-top: 2rem; padding: 2rem; border-left: 3px solid var(--crimson); background: var(--cream); }
+  .contact-detail-block h4 { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--crimson); margin-bottom: 1rem; }
+  .contact-detail-block .detail { font-size: .9rem; color: var(--stone); margin-bottom: .6rem; display: flex; gap: .75rem; align-items: baseline; }
+  .contact-detail-block .detail strong { color: var(--charcoal); font-weight: 500; min-width: 4rem; font-size: .82rem; }
+  .contact-detail-block .detail a { color: var(--crimson); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* RIGHT — form */
+  .contact-form-wrap {}
+  .contact-form-wrap h2 { font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 300; color: var(--charcoal); margin-bottom: .5rem; }
+  .contact-form-wrap h2 em { font-style: italic; color: var(--crimson); }
+  .contact-form-wrap .form-intro { font-size: .95rem; color: var(--stone); margin-bottom: 2.5rem; line-height: 1.75; }
+
+  /* Enquiry type selector */
+  .enquiry-types { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; margin-bottom: 2.5rem; }
+  .enquiry-type { display: none; }
+  .enquiry-label {
+    display: flex; align-items: center; gap: .75rem;
+    padding: 1rem 1.25rem; border: 1.5px solid var(--border);
+    cursor: pointer; transition: all .2s; font-size: .85rem; color: var(--stone);
+    background: var(--light-cream);
+  }
+  .enquiry-label:hover { border-color: var(--crimson); color: var(--charcoal); }
+  .enquiry-label .eq-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; transition: all .2s; }
+  .enquiry-type:checked + .enquiry-label { border-color: var(--crimson); background: var(--cream); color: var(--charcoal); font-weight: 500; }
+  .enquiry-type:checked + .enquiry-label .eq-dot { background: var(--crimson); border-color: var(--crimson); }
+
+  /* Form fields */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+  .form-field { display: flex; flex-direction: column; margin-bottom: 1.25rem; }
+  .form-field label { font-size: .78rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--stone); margin-bottom: .5rem; }
+  .form-field input, .form-field textarea, .form-field select {
+    padding: .85rem 1rem; border: 1.5px solid var(--border); background: var(--light-cream);
+    font-family: var(--sans); font-size: .92rem; color: var(--charcoal);
+    transition: border-color .2s, box-shadow .2s; outline: none; appearance: none; border-radius: 0;
+  }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--crimson); box-shadow: 0 0 0 3px rgba(155,28,28,.08); }
+  .form-field textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+  .form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A716A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+  .form-field ::placeholder { color: var(--muted); }
+
+  .form-submit { display: flex; align-items: center; gap: 1.5rem; margin-top: .5rem; flex-wrap: wrap; }
+  .btn-submit {
+    background: var(--crimson); color: var(--white); border: none;
+    padding: 1rem 2.5rem; font-family: var(--sans); font-size: .82rem; font-weight: 500;
+    letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
+    transition: background .2s; border-radius: 0;
+  }
+  .btn-submit:hover { background: var(--dark-crimson); }
+  .form-note { font-size: .78rem; color: var(--muted); line-height: 1.6; }
+
+  /* Success message */
+  .form-success { display: none; padding: 2rem; background: var(--cream); border: 1px solid var(--border); border-left: 3px solid var(--crimson); }
+  .form-success h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 500; color: var(--charcoal); margin-bottom: .5rem; }
+  .form-success p { font-size: .9rem; color: var(--stone); }
+
+  /* WHAT TO EXPECT */
+  .what-expect { padding: 5rem 0; background: linear-gradient(135deg, var(--cream) 0%, #EDE7DC 100%); }
+  .expect-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .expect-card { padding: 2rem; background: var(--white); border: 1px solid var(--border); }
+  .expect-card .step { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--crimson); margin-bottom: .75rem; }
+  .expect-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--charcoal); margin-bottom: .5rem; }
+  .expect-card p { font-size: .87rem; line-height: 1.75; color: var(--stone); }
+
+  /* FOOTER */
+  .footer { background: var(--charcoal); padding: 3rem 0 2rem; border-top: 3px solid var(--crimson); }
+  .footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+  .athena-bar { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+  .athena-bar p { font-size: .88rem; color: rgba(250,249,248,.5); font-family: var(--serif); font-weight: 300; }
+  .athena-bar a { font-size: .78rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: .5rem 1.25rem; border: 1px solid rgba(255,255,255,.2); color: rgba(250,249,248,.6); transition: all .2s; white-space: nowrap; }
+  .athena-bar a:hover { border-color: rgba(255,255,255,.5); color: var(--white); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+  .footer-brand-name { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--white); margin-bottom: .4rem; }
+  .footer-brand-name span { color: var(--crimson); }
+  .footer-brand p { font-size: .82rem; color: rgba(250,249,248,.4); line-height: 1.7; }
+  .footer-col h4 { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: .55rem; }
+  .footer-col ul li a { font-size: .85rem; color: rgba(250,249,248,.4); transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-bottom p { font-size: .75rem; color: rgba(250,249,248,.2); }
+
+  @media(max-width:900px){
+    .contact-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+    .expect-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .enquiry-types { grid-template-columns: 1fr; }
+  }
+  @media(max-width:600px){
+    .form-row { grid-template-columns: 1fr; }
+    .expect-grid, .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Dr David Silver <span>PhD</span></a>
+    <div class="nav-links">
+      <a href="speaking.html">Speaking</a>
+      <a href="expert-witness.html">Expert Witness</a>
+      <a href="corporate.html">Corporate</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Writing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta active">Get in Touch</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-bg-word" aria-hidden="true">hello</div>
+  <div class="page-hero-inner">
+    <p class="breadcrumb reveal"><a href="index.html">Home</a> &nbsp;/&nbsp; Contact</p>
+    <h1 class="reveal">Let's start a<br><em>conversation.</em></h1>
+    <p class="hero-sub reveal">Whether you're thinking about a talk, an instruction, or simply want to understand more about the work — the best place to start is here.</p>
+  </div>
+</section>
+
+<!-- CONTACT BODY -->
+<section class="contact-body">
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <!-- LEFT — routes + details -->
+      <div class="contact-routes">
+        <p class="eyebrow ruled reveal" style="margin-bottom:2rem;">What brings you here?</p>
+
+        <div class="route-card reveal">
+          <div class="route-num">01</div>
+          <h3>Speaking &amp; Workshops</h3>
+          <p>Keynotes, lunch &amp; learns, half-day workshops or full-day programmes for your team or conference. Starts with a 20-minute discovery call.</p>
+          <a href="speaking.html" class="route-link">See the full speaking page</a>
+        </div>
+
+        <div class="route-card reveal">
+          <div class="route-num">02</div>
+          <h3>Expert Witness Instruction</h3>
+          <p>Medico-legal reporting and court appearances in cases involving musculoskeletal injury, concussion or sports medicine. CPR Part 35 compliant.</p>
+          <a href="expert-witness.html" class="route-link">See expert witness details</a>
+        </div>
+
+        <div class="route-card reveal">
+          <div class="route-num">03</div>
+          <h3>Corporate Wellbeing Consultancy</h3>
+          <p>Longer-term consultancy engagements for organisations building or reviewing their wellbeing strategy. Evidence-based, human-led.</p>
+          <a href="corporate.html" class="route-link">See the consultancy work</a>
+        </div>
+
+        <div class="route-card reveal">
+          <div class="route-num">04</div>
+          <h3>Something Else</h3>
+          <p>Media enquiries, research collaborations, podcast appearances, or anything that doesn't fit neatly into the above — all equally welcome.</p>
+        </div>
+
+        <div class="contact-detail-block reveal">
+          <h4>Direct contact</h4>
+          <div class="detail"><strong>Email</strong> <a href="mailto:athenaphysio@gmail.com">athenaphysio@gmail.com</a></div>
+          <div class="detail"><strong>LinkedIn</strong> <a href="https://www.linkedin.com/in/davidsilver" target="_blank" rel="noopener">linkedin.com/in/davidsilver</a></div>
+          <div class="detail"><strong>Clinic</strong> The Forge Clinic, Richmond &amp; Athena Physiotherapy, Cobham</div>
+        </div>
+      </div>
+
+      <!-- RIGHT — form -->
+      <div class="contact-form-wrap reveal">
+        <h2>Send a <em>message.</em></h2>
+        <p class="form-intro">Fill in the form and David will respond personally — usually within 48 hours. For speaking enquiries, please include your preferred date and audience size if you have them.</p>
+
+        <!-- Enquiry type -->
+        <div class="enquiry-types">
+          <div>
+            <input type="radio" name="enquiry" id="eq-speaking" class="enquiry-type" value="Speaking">
+            <label for="eq-speaking" class="enquiry-label"><span class="eq-dot"></span>Speaking &amp; Workshops</label>
+          </div>
+          <div>
+            <input type="radio" name="enquiry" id="eq-witness" class="enquiry-type" value="Expert Witness">
+            <label for="eq-witness" class="enquiry-label"><span class="eq-dot"></span>Expert Witness</label>
+          </div>
+          <div>
+            <input type="radio" name="enquiry" id="eq-corporate" class="enquiry-type" value="Corporate">
+            <label for="eq-corporate" class="enquiry-label"><span class="eq-dot"></span>Corporate Consultancy</label>
+          </div>
+          <div>
+            <input type="radio" name="enquiry" id="eq-other" class="enquiry-type" value="Other">
+            <label for="eq-other" class="enquiry-label"><span class="eq-dot"></span>Something Else</label>
+          </div>
+        </div>
+
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="first-name">First name *</label>
+              <input type="text" id="first-name" name="firstName" required placeholder="Sarah">
+            </div>
+            <div class="form-field">
+              <label for="last-name">Last name *</label>
+              <input type="text" id="last-name" name="lastName" required placeholder="Jones">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email address *</label>
+            <input type="email" id="email" name="email" required placeholder="sarah@company.com">
+          </div>
+
+          <div class="form-field">
+            <label for="organisation">Organisation</label>
+            <input type="text" id="organisation" name="organisation" placeholder="Company or firm name">
+          </div>
+
+          <div class="form-field">
+            <label for="role">Your role</label>
+            <input type="text" id="role" name="role" placeholder="e.g. HR Director, Solicitor, Events Manager">
+          </div>
+
+          <div class="form-field">
+            <label for="message">Your message *</label>
+            <textarea id="message" name="message" required placeholder="Tell me a little about what you have in mind — the more context you can give, the better I can respond..."></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="how">How did you hear about David?</label>
+            <select id="how" name="howHeard">
+              <option value="" disabled selected>Please select</option>
+              <option>Personal referral</option>
+              <option>LinkedIn</option>
+              <option>Google search</option>
+              <option>Saw David speak</option>
+              <option>EWI directory</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn-submit">Send Message</button>
+            <p class="form-note">All messages are read personally.<br>Typical response time: within 48 hours.</p>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <h3>Message sent — thank you.</h3>
+          <p>David will be in touch personally, usually within 48 hours. If your enquiry is time-sensitive, please also email <a href="mailto:athenaphysio@gmail.com" style="color:var(--crimson);">athenaphysio@gmail.com</a> directly.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="what-expect">
+  <div class="wrap">
+    <p class="eyebrow ruled reveal">For speaking enquiries</p>
+    <div class="expect-grid">
+      <div class="expect-card reveal">
+        <div class="step">01</div>
+        <h3>Discovery Call</h3>
+        <p>A 20-minute conversation to understand your audience, your objectives, and what would make this genuinely worthwhile for the people in the room.</p>
+      </div>
+      <div class="expect-card reveal">
+        <div class="step">02</div>
+        <h3>Tailored Proposal</h3>
+        <p>A clear recommendation on format, talk selection and fee — delivered within 48 hours of the discovery call. No templates, no unnecessary back-and-forth.</p>
+      </div>
+      <div class="expect-card reveal">
+        <div class="step">03</div>
+        <h3>Pre-session Briefing</h3>
+        <p>Once confirmed, a pre-session call to ensure the content lands well for your specific audience. Post-session follow-up is available on request.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem;font-size:.82rem;color:var(--muted);">Typical lead time: 3–6 weeks. Shorter timelines accommodated where possible.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="athena-bar">
+      <p>For physiotherapy appointments, concussion assessment and online rehabilitation programmes, visit Athena Physiotherapy.</p>
+      <a href="https://athenaphysio.co.uk" target="_blank" rel="noopener">Athena Physiotherapy &rarr;</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Dr David Silver <span>PhD</span></div>
+        <p>Chartered Physiotherapist, corporate wellbeing speaker, and expert witness. Practising from Richmond and Cobham.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Work</h4>
+        <ul>
+          <li><a href="speaking.html">Speaking</a></li>
+          <li><a href="expert-witness.html">Expert Witness</a></li>
+          <li><a href="corporate.html">Corporate Wellbeing</a></li>
+          <li><a href="research.html">HR Research</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="blog.html">Writing</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Get in Touch</a></li>
+          <li><a href="https://www.linkedin.com/in/davidsilver" target="_blank">LinkedIn &nearr;</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Dr David Silver PhD. All rights reserved.</p>
+      <p>CSP No. 079015 &middot; HCPC No. PH82005 &middot; drdavidsilverphd.com</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+  // Reveals
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+  document.querySelectorAll('.page-hero .reveal').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), 150 + i * 120);
+  });
+
+  // Form submission — mailto fallback (replace with Formspree/Netlify in production)
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = new FormData(this);
+    const enquiry = document.querySelector('input[name="enquiry"]:checked');
+    const type = enquiry ? enquiry.value : 'General enquiry';
+
+    const subject = encodeURIComponent(`[${type}] from ${data.get('firstName')} ${data.get('lastName')}`);
+    const body = encodeURIComponent(
+      `Name: ${data.get('firstName')} ${data.get('lastName')}\n` +
+      `Email: ${data.get('email')}\n` +
+      `Organisation: ${data.get('organisation') || 'Not provided'}\n` +
+      `Role: ${data.get('role') || 'Not provided'}\n` +
+      `Enquiry type: ${type}\n` +
+      `How they heard: ${data.get('howHeard') || 'Not provided'}\n\n` +
+      `Message:\n${data.get('message')}`
+    );
+
+    window.location.href = `mailto:athenaphysio@gmail.com?subject=${subject}&body=${body}`;
+
+    // Show success
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+</script>
+</body>
+</html>
