@@ -42,11 +42,31 @@
   .nav-brand { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--charcoal); }
   .nav-brand span { color: var(--crimson); }
   .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--charcoal); transition: all .3s; }
   .nav-links a { font-size: .82rem; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; color: var(--stone); transition: color .2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--crimson); }
   .nav-cta { font-size: .78rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: .5rem 1.25rem; border: 1.5px solid var(--crimson); color: var(--crimson); transition: all .2s; border-radius: 2px; }
   .nav-cta:hover { background: var(--crimson); color: var(--white); }
-  @media(max-width:900px){ .nav-links { display: none; } }
+  @media(max-width:900px){
+    .nav-links {
+      display: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: flex-start; gap: 0;
+      background: rgba(250,249,248,.98); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: .5rem 2rem 1.25rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: .85rem 0; width: 100%; border-bottom: 1px solid var(--border); }
+    .nav-links a:last-child { border-bottom: 0; }
+    .nav-links a.nav-cta, .nav-links a.nav-cta.active { border: 1.5px solid var(--crimson); margin-top: .75rem; padding: .6rem 1.25rem; width: auto; }
+    .nav-hamburger { display: flex; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  }
 
   /* BUTTONS */
   .btn-primary { display: inline-flex; align-items: center; gap: .5rem; background: var(--crimson); color: var(--white); padding: .85rem 2rem; font-size: .82rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; border-radius: 2px; transition: background .2s; }
@@ -213,6 +233,9 @@
       <a href="blog.html">Writing</a>
       <a href="about.html" class="active">About</a>
       <a href="contact.html" class="nav-cta">Get in Touch</a>
+    </div>
+    <div class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
     </div>
   </div>
 </nav>
@@ -548,6 +571,24 @@
   document.querySelectorAll('.page-hero .reveal').forEach((el, i) => {
     setTimeout(() => el.classList.add('visible'), 150 + i * 120);
   });
+
+  // Mobile drop-down menu
+  (function(){
+    var hb = document.getElementById('hamburger');
+    var links = document.querySelector('.nav-links');
+    if (hb && links) {
+      hb.addEventListener('click', function(){
+        var open = links.classList.toggle('open');
+        hb.classList.toggle('open', open);
+      });
+      links.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){
+          links.classList.remove('open');
+          hb.classList.remove('open');
+        });
+      });
+    }
+  })();
 </script>
 </body>
 </html>

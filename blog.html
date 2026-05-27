@@ -29,7 +29,27 @@
   .nav-links a:hover, .nav-links a.active { color: var(--crimson); }
   .nav-cta { font-size: .78rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: .5rem 1.25rem; border: 1.5px solid var(--crimson); color: var(--crimson); transition: all .2s; border-radius: 2px; }
   .nav-cta:hover { background: var(--crimson); color: var(--white); }
-  @media(max-width:900px) { .nav-links { display: none; } }
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: .4rem; flex-direction: column; gap: 5px; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--charcoal); transition: transform .3s, opacity .3s; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media(max-width:900px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(250,249,248,.98); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; align-items: flex-start;
+      gap: 0; padding: .5rem 2rem 1.25rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: .85rem 0; width: 100%; border-bottom: 1px solid var(--border); font-size: .9rem; }
+    .nav-links a:last-child { border-bottom: 0; }
+    .nav-links a.nav-cta { border: 1.5px solid var(--crimson); margin-top: .75rem; padding: .6rem 1.25rem; width: auto; }
+  }
   .page-hero { min-height: 38vh; display: flex; align-items: flex-end; padding-top: 5rem; background: linear-gradient(150deg, var(--charcoal) 0%, #1A0A0A 100%); position: relative; overflow: hidden; }
   .hero-rule { position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--crimson) 0%, transparent 60%); }
   .page-hero-inner { position: relative; z-index: 1; padding: 0 2rem 3.5rem; max-width: 1160px; margin: 0 auto; width: 100%; }
@@ -127,7 +147,10 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">Dr David Silver <span>PhD</span></a>
-    <div class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
       <a href="speaking.html">Speaking</a>
       <a href="expert-witness.html">Expert Witness</a>
       <a href="corporate.html">Corporate</a>
@@ -184,7 +207,7 @@
             <span class="post-read">9 min</span>
           </div>
           <h2 class="post-title">What the Screen Cannot See</h2>
-          <p class="post-subtitle">*On AI, the clinical relationship, and the things that happen in a room that a programme can never account for.*</p>
+          <p class="post-subtitle">On AI, the clinical relationship, and the things that happen in a room that a programme can never account for.</p>
           <p class="post-summary">Someone sent me a video this week. Day eighty-eight of what he calls his AI series, showing his audience that he had asked Claude to diagnose a foot injury and produce a four-week recovery programme. ...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -201,7 +224,7 @@
             <span class="post-read">8 min</span>
           </div>
           <h2 class="post-title">These Words Were Never Meant to Be Written Down</h2>
-          <p class="post-subtitle">*On dyslexia, twenty years of unrecorded insight, and what happens when AI finally lets you see yourself.*</p>
+          <p class="post-subtitle">On dyslexia, twenty years of unrecorded insight, and what happens when AI finally lets you see yourself.</p>
           <p class="post-summary">Let me tell you how this newsletter came to exist.</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -218,7 +241,7 @@
             <span class="post-read">7 min</span>
           </div>
           <h2 class="post-title">I Am Not Trying to Educate You</h2>
-          <p class="post-subtitle">*Why information does not change behaviour and what the statistic was actually for.*</p>
+          <p class="post-subtitle">Why information does not change behaviour and what the statistic was actually for.</p>
           <p class="post-summary">I have worked with hundreds of people who had been sedentary for years, not through laziness but through a combination of pain, fear, and the accumulated weight of a life that had gradually contracted...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -235,7 +258,7 @@
             <span class="post-read">8 min</span>
           </div>
           <h2 class="post-title">The Dyslexic Advantage</h2>
-          <p class="post-subtitle">*The boy on the minibus, the man on the floor in lockdown, and the superpowers nobody thinks to mention.*</p>
+          <p class="post-subtitle">The boy on the minibus, the man on the floor in lockdown, and the superpowers nobody thinks to mention.</p>
           <p class="post-summary">I struggled at school with dyslexia very much, and not because I was not a particularly bright kid, I was told I was, but the academic aspects of maths and English, reading and writing, were hugely ch...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -252,7 +275,7 @@
             <span class="post-read">7 min</span>
           </div>
           <h2 class="post-title">I Am Not What You Think I Am</h2>
-          <p class="post-subtitle">*On the gap between what physiotherapy is assumed to be and what actually happens in the room.*</p>
+          <p class="post-subtitle">On the gap between what physiotherapy is assumed to be and what actually happens in the room.</p>
           <p class="post-summary">A new client came in recently and we had never met before. Before I had said a word about what we were going to do, he said: so, will you be doing some massage, or...? It is a question I hear most oft...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -269,7 +292,7 @@
             <span class="post-read">6 min</span>
           </div>
           <h2 class="post-title">Your Brain Is Lying to You and It's Trying to Help</h2>
-          <p class="post-subtitle">*Each edition takes something I actually said, captured by AI note-taking, and explores what it contains.*</p>
+          <p class="post-subtitle">Each edition takes something I actually said, captured by AI note-taking, and explores what it contains.</p>
           <p class="post-summary">A client came to see me recently who had been dealing with a persistent back condition for years, good days and bad with no clear pattern, and she asked me why some days felt so different when nothing...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -286,7 +309,7 @@
             <span class="post-read">8 min</span>
           </div>
           <h2 class="post-title">The Pain Paradox</h2>
-          <p class="post-subtitle">*Why people stop rehabilitating at exactly the wrong moment and what to do about it.*</p>
+          <p class="post-subtitle">Why people stop rehabilitating at exactly the wrong moment and what to do about it.</p>
           <p class="post-summary">I had a client recently who did everything right. Acute phase, perfect, turned up to every session, did the home programme without being chased, asked intelligent questions and engaged with the ration...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -303,7 +326,7 @@
             <span class="post-read">7 min</span>
           </div>
           <h2 class="post-title">The Weighing Scales</h2>
-          <p class="post-subtitle">*Each edition takes something I actually said, captured by AI note-taking, and explores what it contains.*</p>
+          <p class="post-subtitle">Each edition takes something I actually said, captured by AI note-taking, and explores what it contains.</p>
           <p class="post-summary">A client came to see me recently with persistent pain, good days and bad days and no clear logic to either. She had started to believe the bad days meant something was getting worse, that she was at s...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -320,7 +343,7 @@
             <span class="post-read">7 min</span>
           </div>
           <h2 class="post-title">The Nonverbal Coach</h2>
-          <p class="post-subtitle">*Why the most powerful clinical interventions are the ones the patient never notices.*</p>
+          <p class="post-subtitle">Why the most powerful clinical interventions are the ones the patient never notices.</p>
           <p class="post-summary">A client came in recently and we worked on a squat pattern that did not look right, not dangerously wrong, just not right, with the right knee tracking poorly. The default coaching response, and my in...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -337,7 +360,7 @@
             <span class="post-read">6 min</span>
           </div>
           <h2 class="post-title">The 48-Hour PhD</h2>
-          <p class="post-subtitle">*What AI can produce. What it can never replace.*</p>
+          <p class="post-subtitle">What AI can produce. What it can never replace.</p>
           <p class="post-summary">I was having a conversation with an undergraduate student recently, not a clinical one but just a discussion about AI and what it means for people who have spent years building expertise the hard way....</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -354,7 +377,7 @@
             <span class="post-read">7 min</span>
           </div>
           <h2 class="post-title">When AI Chooses Your Doctor</h2>
-          <p class="post-subtitle">*Why your experience just became your most important asset.*</p>
+          <p class="post-subtitle">Why your experience just became your most important asset.</p>
           <p class="post-summary">I was at a presentation recently speaking to a group of business leaders in the wellbeing sector, and there was a breakout discussion afterwards that stopped me in my tracks. Someone said: if everyone...</p>
           <span class="post-link">Read the edition &rarr;</span>
         </div>
@@ -409,7 +432,7 @@
       <span class="post-cat-tag">Clinical Insight</span>
     </div>
     <h1 class="post-modal-title">What the Screen Cannot See</h1>
-    <p class="post-modal-subtitle">*On AI, the clinical relationship, and the things that happen in a room that a programme can never account for.*</p>
+    <p class="post-modal-subtitle">On AI, the clinical relationship, and the things that happen in a room that a programme can never account for.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; Jun '26 &nbsp;&middot;&nbsp; 9 min read</div>
     <div class="post-modal-body">
 <p>What the Screen Cannot See</p>
@@ -460,7 +483,7 @@
       <span class="post-cat-tag">Clinical Insight</span>
     </div>
     <h1 class="post-modal-title">These Words Were Never Meant to Be Written Down</h1>
-    <p class="post-modal-subtitle">*On dyslexia, twenty years of unrecorded insight, and what happens when AI finally lets you see yourself.*</p>
+    <p class="post-modal-subtitle">On dyslexia, twenty years of unrecorded insight, and what happens when AI finally lets you see yourself.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; 8 min read</div>
     <div class="post-modal-body">
 <p>These Words Were Never Meant to Be Written Down</p>
@@ -476,7 +499,6 @@
 <h3 class="post-section">WHERE THIS STARTED</h3>
 <p>I struggled at school, profoundly at times. Dyslexia in the 80s was not well understood to say the least, and I was one of the lucky ones. The classroom was a place where I consistently felt underprepared and exposed, never quite enough, and in hindsight I was exhausted by the struggle, not just from trying to keep up but from covering for my inadequacy.</p>
 <p>What the system did have was sport, and on the pitch none of that mattered. What mattered was how much effort I put in and how I linked with my mates, and for the first time in my educational life I had a space where my brain and body worked as an asset rather than a liability. Sport and exercise became my sanctuary in a way they still are today, the place where I learned what competence felt like and where I built the confidence the classroom was quietly dismantling. Even now, the thought of running onto a pitch fills me with a calm that is difficult to describe.</p>
-<blockquote class="post-quote"><p>EDIT HERE: Add a specific memory here. A match, a coach, a moment on a pitch you still remember. The more specific the better.</p></blockquote>
 <h3 class="post-section">THE MORNING I STOPPED PLANNING MY SESSIONS</h3>
 <p>Early in my career I had a ritual of reading through my patient notes every morning and planning each session in detail, and I still get in early to ensure I have that time. I was prepared and organised, but what I did not realise or say out loud, not for a long time, was why. The anxiety I had carried from school had simply followed me into professional life, the same coping mechanism operating in a different classroom.</p>
 <p>Nine times out of ten the person who walked through my door bore almost no resemblance to the client I had planned for, and the carefully prepared session would last about four minutes before I needed to let it go and actually meet the person in front of me. The Royal Marines have a motto I have carried with me ever since: comfortable with uncertainty. For someone who spent their early life terrified of being caught unprepared, those three words landed like a revelation, because they showed me I had to back myself and my skills rather than any playbook.</p>
@@ -498,7 +520,7 @@
       <span class="post-cat-tag">Clinical Insight</span>
     </div>
     <h1 class="post-modal-title">I Am Not Trying to Educate You</h1>
-    <p class="post-modal-subtitle">*Why information does not change behaviour and what the statistic was actually for.*</p>
+    <p class="post-modal-subtitle">Why information does not change behaviour and what the statistic was actually for.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; 7 min read</div>
     <div class="post-modal-body">
 <p>I Am Not Trying to Educate You</p>
@@ -515,7 +537,7 @@
 <p>And yet this is never an intellectual shift. The person in front of me was not suddenly better informed, because they already knew in some abstract sense that sedentary behaviour was bad for them. What changed was how it felt. The statistics made the cost of inaction suddenly viscerally real, no longer a distant risk but a present one, and that is what the statistic was for. Not education. Emotion.</p>
 <h3 class="post-section">THE KNOWLEDGE TRAP</h3>
 <p>My PhD centred on behaviour change within injury reporting, and it is the research that sits underneath everything I do clinically, though I rarely talk about it directly. The central finding, consistent with decades of behaviour change research across almost every health domain, is this:</p>
-<blockquote class="post-quote"><p>*Knowledge does not change behaviour.*</p></blockquote>
+<blockquote class="post-quote"><p>Knowledge does not change behaviour.</p></blockquote>
 <p>People who smoke know it causes cancer, people who drink too much know the damage it does, people who are sedentary know they should move more, and yet they know all of this and they do not change. The conventional medical model is built almost entirely on the opposite assumption, that people who are not acting in a certain way are simply uninformed, and that if you give them the right information they will make the right choices. This is not just wrong. It is, as I have come to think of it, quietly patronising, because it treats the patient as a rational information-processing machine whose decisions are constrained only by incomplete data, ignoring identity, emotion, habit, fear, social context, and the deeply irrational way that human beings actually make decisions about their own bodies.</p>
 <blockquote class="post-quote"><p>The assumption that people who are not acting are simply uninformed is not just clinically ineffective. It is a failure of imagination about what it means to be a person trying to change.</p></blockquote>
 <p class="post-attr">Dr David Silver PhD</p>
@@ -523,7 +545,6 @@
 <p>Emotion is the lever, not information about consequences but the felt sense of those consequences, not the statistic but the image the statistic conjures, not the clinical recommendation but the relationship with the person making it. The forty-five percent mortality figure is not useful because it informs. It is useful because, delivered at the right moment in the right relationship, it makes someone feel the weight of continuing as they are and makes inaction costly in a way that is immediate and personal rather than distant and abstract.</p>
 <p>Think of the man who started exercising not because of a health statistic but because he could not bear the thought of being too weak to walk with his daughter. The woman who kept going with her programme not because she understood pain neuroscience but because the clinician who explained it had earned her trust. The athlete who returned to training not because they had been told the tissue was healed but because they had been helped to feel safe in their own body again. In every case the emotional driver preceded and sustained the behavioural change, the information where it existed was the vehicle, and the feeling was the fuel.</p>
 <blockquote class="post-quote"><p>If I do use fear as a motivator, which can be powerful, it does not sit comfortably with me, and I am convinced that positive emotions are ultimately more powerful. So I will always try to combine the two. The joy of the conversation, the hug and the picnic up the mountain. The grandchild held. These are the real drivers.</p></blockquote>
-<blockquote class="post-quote"><p>EDIT HERE: Add one or two specific examples of using a statistic or clinical finding as an emotional tool rather than an educational one. What did you say? What shifted in the room?</p></blockquote>
 <h3 class="post-section">THE BEHAVIOUR CHANGE THAT ACTUALLY WORKS</h3>
 <p>My clinical practice is built around a principle that my PhD research confirmed and twenty years of being in the room with people has reinforced: doing something consistently beats doing the perfect thing occasionally, every time, without exception. This sounds obvious, and yet it is not how rehabilitation is designed or delivered in practice.</p>
 <p>Most programmes are optimised for specificity, the right exercise, the right load, the right progression, and these things matter, but they matter only if the programme gets done, and a programme that depends on information and good intentions alone will not, in the medium term, get done. A programme anchored to something that matters, to identity, to relationships, to a future the person actually wants, will. This is why I spend as much time in a first session finding out what someone loves as I do assessing how they move, not because I am being soft but because I am building the motivational infrastructure without which everything else is pointless. The rehabilitation is not the point. The reason to do the rehabilitation is the point.</p>
@@ -543,7 +564,7 @@
       <span class="post-cat-tag">Brain & Body</span>
     </div>
     <h1 class="post-modal-title">The Dyslexic Advantage</h1>
-    <p class="post-modal-subtitle">*The boy on the minibus, the man on the floor in lockdown, and the superpowers nobody thinks to mention.*</p>
+    <p class="post-modal-subtitle">The boy on the minibus, the man on the floor in lockdown, and the superpowers nobody thinks to mention.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; 8 min read</div>
     <div class="post-modal-body">
 <p>The Dyslexic Advantage</p>
@@ -563,7 +584,6 @@
 <p>And then the voice said: could you be the person to comfort that individual? I burst into uncontrollable tears. It was almost an out of body experience, and it started to make me, for the first time ever, really unpack the emotions I had as a child around this, without appearing melodramatic, how traumatic it was and how much of it shaped who I have become and am still becoming. Only now, in my forties, am I comfortable sitting in that space.</p>
 <h3 class="post-section">THE SUPERPOWERS NOBODY MENTIONS</h3>
 <p>As I have got older I have started to realise the strengths that dyslexia has provided me, the superpowers of communication and visualisation, of lateral thinking and of deep empathy. It has given me so much, but because I, like everyone, live in my own skin, I do not have a point of reference and do not see those things naturally.</p>
-<blockquote class="post-quote"><p>EDIT HERE: Add one specific clinical moment here. A time you read something in the room that nobody else had noticed. One moment, briefly told.</p></blockquote>
 <p>What I have come to understand is that the very thing the education system treated as a flaw was quietly building the most important skills I would ever have, the emotional attunement, the ability to hold complexity without needing to reduce it, the comfort with uncertainty because uncertainty was where I had always lived. In twenty years of rehabilitation, these have not been soft secondary skills. They have been my sharpest clinical tools.</p>
 <h3 class="post-section">WHAT AI GAVE BACK</h3>
 <p>Now I do not type in sessions. I listen, and AI has alleviated the administrative struggles that were so time-consuming, the thing that was limiting my capacity to engage with people in a really powerfully connected way on an emotional level, which I think is my greatest asset. But the deeper gift is this: because AI now captures what I say in the moment, I can finally see my own thinking, and the moving parts that were rattling around in my head for twenty years I can now understand, name, and share.</p>
@@ -585,7 +605,7 @@
       <span class="post-cat-tag">Clinical Insight</span>
     </div>
     <h1 class="post-modal-title">I Am Not What You Think I Am</h1>
-    <p class="post-modal-subtitle">*On the gap between what physiotherapy is assumed to be and what actually happens in the room.*</p>
+    <p class="post-modal-subtitle">On the gap between what physiotherapy is assumed to be and what actually happens in the room.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; July 2026 &nbsp;&middot;&nbsp; 7 min read</div>
     <div class="post-modal-body">
 <p>I Am Not What You Think I Am</p>
@@ -597,10 +617,10 @@
 <h3 class="post-section">WHAT PEOPLE THINK PHYSIOTHERAPY IS</h3>
 <p>The word physiotherapy conjures something specific, a treatment table, someone with qualified hands working on the part that hurts, possibly some exercises on a photocopied sheet, and I used to draw loads of pictures. There is nothing deeply wrong with this model and it exists and has its place, but it captures perhaps twenty percent of what I actually do, and in my opinion it is the least interesting twenty percent.</p>
 <h3 class="post-section">WHAT PHYSIOTHERAPY ACTUALLY IS</h3>
-<p>*Neuroscience education.  *The single most important thing I do in many appointments is change how a person understands their own pain, not manage it, not reduce it through technique, but change the fundamental model they are using to interpret what their body is telling them. Pain is not a direct damage signal. It is a protective output, and two people with identical MRI findings can have completely different pain experiences. Understanding this one thing changes everything, and healthcare almost never tells people this. I do, every time.</p>
-<p>*Cognitive reframing.  *Before I have laid a hand on anyone I am already changing the relationship between that person and their symptoms. The weekday-to-weekend pattern in pain levels is almost never about the chair, and the client who feels better on holiday is not experiencing a different body. They are experiencing a different context.</p>
-<p>*Behavioural coaching.  *When a movement does not look right, the conventional response is to name the fault and instruct the correction, but the moment you name a fault you introduce it into conscious awareness, and conscious awareness in movement is the enemy of fluency. What I do instead is create the conditions in which the correct movement becomes the obvious natural option.</p>
-<p>*Philosophical counselling.  *I worked with a man once who had not been able to walk with his daughter since she left for university. His resistance to exercise traced back to a weekly forced swim at boarding school in the 1970s that had traumatised him for forty years, and nobody had ever connected those two things. We did not start with exercise. We started with the daughter. He cried. I nearly did too. That is not physiotherapy in any conventional sense, but it is what was needed.</p>
+<p><em>Neuroscience education.</em> The single most important thing I do in many appointments is change how a person understands their own pain, not manage it, not reduce it through technique, but change the fundamental model they are using to interpret what their body is telling them. Pain is not a direct damage signal. It is a protective output, and two people with identical MRI findings can have completely different pain experiences. Understanding this one thing changes everything, and healthcare almost never tells people this. I do, every time.</p>
+<p><em>Cognitive reframing.</em> Before I have laid a hand on anyone I am already changing the relationship between that person and their symptoms. The weekday-to-weekend pattern in pain levels is almost never about the chair, and the client who feels better on holiday is not experiencing a different body. They are experiencing a different context.</p>
+<p><em>Behavioural coaching.</em> When a movement does not look right, the conventional response is to name the fault and instruct the correction, but the moment you name a fault you introduce it into conscious awareness, and conscious awareness in movement is the enemy of fluency. What I do instead is create the conditions in which the correct movement becomes the obvious natural option.</p>
+<p><em>Philosophical counselling.</em> I worked with a man once who had not been able to walk with his daughter since she left for university. His resistance to exercise traced back to a weekly forced swim at boarding school in the 1970s that had traumatised him for forty years, and nobody had ever connected those two things. We did not start with exercise. We started with the daughter. He cried. I nearly did too. That is not physiotherapy in any conventional sense, but it is what was needed.</p>
 <h3 class="post-section">I AM NOT A RUBBER</h3>
 <blockquote class="post-quote"><p>Things that change your tissue are knives, car crashes and movement. That's it. If rubbing changed tissue structure, we would be like a jellyfish. What soft tissue work does, when it does anything at all, is desensitize an electrically stimulated organ. It relaxes. It soothes. That is real and valuable. But it is not rehabilitation.</p></blockquote>
 <p>From the clinic</p>
@@ -621,7 +641,7 @@
       <span class="post-cat-tag">Brain & Body</span>
     </div>
     <h1 class="post-modal-title">Your Brain Is Lying to You and It's Trying to Help</h1>
-    <p class="post-modal-subtitle">*Each edition takes something I actually said, captured by AI note-taking, and explores what it contains.*</p>
+    <p class="post-modal-subtitle">Each edition takes something I actually said, captured by AI note-taking, and explores what it contains.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; July 2026 &nbsp;&middot;&nbsp; 6 min read</div>
     <div class="post-modal-body">
 <p>Your Brain Is Lying to You and It's Trying to Help</p>
@@ -635,7 +655,6 @@
 <h3 class="post-section">THE INSIGHT</h3>
 <p>Pain is the most universally experienced and most fundamentally misunderstood thing in healthcare. We have inherited a model of pain that is essentially mechanical, damage equals pain, and it is intuitive and basically logical, but in a significant proportion of cases it is wrong.</p>
 <p>Pain is not a signal transmitted from an injured body part to a passive brain. It is an output, a decision made by the brain based on a complex calculation about threat and safety, and two people with identical MRI findings can have completely different pain experiences, one debilitated and the other with no symptoms at all. The hardware is the same. The software is reading it differently.</p>
-<blockquote class="post-quote"><p>EDIT HERE: Add a patient example here. Someone whose scan looked alarming but whose symptoms were manageable, or vice versa.</p></blockquote>
 <p>In my experience, a client who understands that their pain is a protective output rather than a damage signal relates to their own body differently, becoming less afraid, and fear is one of the most powerful amplifiers of pain there is.</p>
 <h3 class="post-section">THE BIGGER PICTURE</h3>
 <p>Explaining pain neuroscience takes time, skill and judgement, requiring the clinician to be genuinely present, to read whether the client is following, to adjust in real time, and sometimes it can be presented and unpacked in minutes while other times it takes several months. None of that can be automated, because it happens in a relationship built on trust.</p>
@@ -653,7 +672,7 @@
       <span class="post-cat-tag">Brain & Body</span>
     </div>
     <h1 class="post-modal-title">The Pain Paradox</h1>
-    <p class="post-modal-subtitle">*Why people stop rehabilitating at exactly the wrong moment and what to do about it.*</p>
+    <p class="post-modal-subtitle">Why people stop rehabilitating at exactly the wrong moment and what to do about it.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; August 2026 &nbsp;&middot;&nbsp; 8 min read</div>
     <div class="post-modal-body">
 <p>The Pain Paradox</p>
@@ -668,7 +687,6 @@
 <blockquote class="post-quote"><p>When symptoms are contextualised and variable, when the good days are starting to outnumber the bad, we are understandably less motivated for change. Breaking that cycle and being proactive is far harder. The pain that drove everything has become intermittent, and without it, the urgency fades.</p></blockquote>
 <p class="post-attr">Dr David Silver PhD</p>
 <p>The system that was screaming for attention is now whispering, and whispers are easy to ignore. This is the pain paradox. Motivation and symptom severity travel together, and as one improves so does the other, so the clinician builds a relationship, establishes trust, explains the rationale, gets the client moving, and then just as the genuinely difficult work should begin, the fuel runs out.</p>
-<blockquote class="post-quote"><p>EDIT HERE: Add a patient example here. Someone who did well in the acute phase and then dropped off. What was the turning point? What brought them back, if anything?</p></blockquote>
 <p>The implications of this are profound and largely unacknowledged in how rehabilitation is structured and funded. Most clinical models front-load care, with more frequent sessions in the acute phase tapering off as symptoms improve, which is the exact inverse of what the motivational science suggests is needed. I am sure many clients are surprised at how little I want to see them when they have just been injured, and do not get me wrong, if you do not remove the barriers to good healing and progress early you are not going to recover well, but there is only so much you can do because nature is doing its thing.</p>
 <p>The acute phase is when people show up regardless, because they are in enough pain to overcome the inertia of change, and what they need then is reassurance, explanation and a clear direction. What they need in the recovery phase, when motivation is falling and the programme is hardest, is a relationship, accountability, a reason to keep going that does not depend on hurting, and the understanding that their motivators need to change.</p>
 <h3 class="post-section">THE BIGGER PICTURE</h3>
@@ -688,7 +706,7 @@
       <span class="post-cat-tag">Clinical Insight</span>
     </div>
     <h1 class="post-modal-title">The Weighing Scales</h1>
-    <p class="post-modal-subtitle">*Each edition takes something I actually said, captured by AI note-taking, and explores what it contains.*</p>
+    <p class="post-modal-subtitle">Each edition takes something I actually said, captured by AI note-taking, and explores what it contains.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; August 2026 &nbsp;&middot;&nbsp; 7 min read</div>
     <div class="post-modal-body">
 <p>The Weighing Scales</p>
@@ -701,7 +719,6 @@
 <p>So it is not about what is physically happening in my back on a given day, she said. Not primarily, I said, not on the days that confuse you.</p>
 <h3 class="post-section">WHY THE SCALES TIP</h3>
 <p>Pain responds to everything: how well you slept, the argument you had before work, the email you are dreading, the memory of the last bad flare, the friend who said oh, I had that, it never really went away.</p>
-<blockquote class="post-quote"><p>EDIT HERE: Add a patient example here. Scales tipping based on something entirely non-physical. A bereavement, a job change, a relationship breakdown.</p></blockquote>
 <blockquote class="post-quote"><p>The biggest driver is your system being more sensitive when you are at work because of the stress associated with it. Same body in the same position. Different context. Very different feelings.</p></blockquote>
 <p>From the clinic</p>
 <h3 class="post-section">THE DUBAI CHAIR</h3>
@@ -731,7 +748,7 @@
       <span class="post-cat-tag">Clinical Insight</span>
     </div>
     <h1 class="post-modal-title">The Nonverbal Coach</h1>
-    <p class="post-modal-subtitle">*Why the most powerful clinical interventions are the ones the patient never notices.*</p>
+    <p class="post-modal-subtitle">Why the most powerful clinical interventions are the ones the patient never notices.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; September 2026 &nbsp;&middot;&nbsp; 7 min read</div>
     <div class="post-modal-body">
 <p>The Nonverbal Coach</p>
@@ -745,7 +762,6 @@
 <p>The coaching and rehabilitation industry is built on verbal cues, observing and identifying the fault, naming it and instructing the correction, but the moment you name a fault you introduce it into conscious awareness, and conscious awareness in movement is the enemy of fluency. More than that, correction is intrinsically critique, even when dressed up in positivity, even sandwiched between the highest praise, because there is always a critique in it. What is reinforced without conscious awareness is reinforced twice as hard.</p>
 <h3 class="post-section">WHAT YOU DO INSTEAD</h3>
 <p>You do not fix the movement. You create the conditions in which a different movement becomes inevitable, a drill that demands exactly the thing that is missing, a position that makes the compensatory pattern less inevitable, a load that forces the body to find the right solution because the wrong one simply will not work. The client does the drill, returns to the original movement, and it has changed, not because they were told what to do differently but because their neuromuscular system has been quietly reorganised around a new pattern.</p>
-<blockquote class="post-quote"><p>EDIT HERE: Add a specific drill you commonly use to correct a movement fault without naming it. Two sentences. The more concrete the better.</p></blockquote>
 <blockquote class="post-quote"><p>When you come to do the flowing thing, you do not need to worry about whether it looks right or not. Because if we have done it well, all of the As, Bs and Cs that have led up to it mean that you are going to be moving in a flowing, hopefully subconscious fashion.</p></blockquote>
 <p>From the clinic</p>
 <h3 class="post-section">THE MICK JAGGER PRINCIPLE</h3>
@@ -769,7 +785,7 @@
       <span class="post-cat-tag">Performance</span>
     </div>
     <h1 class="post-modal-title">The 48-Hour PhD</h1>
-    <p class="post-modal-subtitle">*What AI can produce. What it can never replace.*</p>
+    <p class="post-modal-subtitle">What AI can produce. What it can never replace.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; September 2026 &nbsp;&middot;&nbsp; 6 min read</div>
     <div class="post-modal-body">
 <p>The 48-Hour PhD</p>
@@ -800,7 +816,7 @@
       <span class="post-cat-tag">Performance</span>
     </div>
     <h1 class="post-modal-title">When AI Chooses Your Doctor</h1>
-    <p class="post-modal-subtitle">*Why your experience just became your most important asset.*</p>
+    <p class="post-modal-subtitle">Why your experience just became your most important asset.</p>
     <div class="post-modal-byline">Dr David Silver PhD &nbsp;&middot;&nbsp; October 2026 &nbsp;&middot;&nbsp; 7 min read</div>
     <div class="post-modal-body">
 <p>When AI Chooses Your Doctor</p>
@@ -829,6 +845,25 @@
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+  // Mobile drop-down menu
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // Close the menu when any link is tapped
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); obs.unobserve(e.target); } });
   }, { threshold: 0.07 });
