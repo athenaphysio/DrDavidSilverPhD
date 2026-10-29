@@ -646,6 +646,19 @@ footer { background: var(--black-deep); color: var(--on-dark); padding: 60px 28p
 
 /* Footer logo mark */
 .footer-mark { width: 26px; height: 26px; object-fit: contain; vertical-align: -5px; margin-right: 8px; display: inline-block; }
+
+/* ===== v4 ===== */
+.hero-portrait { border: 2px solid var(--crimson); }
+/* concussion: map motif only, no brain */
+.tex-brain::before { display: none; }
+.tex-brain::after { opacity: 0.07; }
+/* light contour texture on cream / sand sections */
+.about-section, .wheel-section, .digital-section, .wellbeing-section, .credentials-section, .testimonials-section, .writing-section { position: relative; isolation: isolate; }
+.about-section::before, .wheel-section::before, .digital-section::before, .wellbeing-section::before, .credentials-section::before, .testimonials-section::before, .writing-section::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url('tex/topo-light.svg') center / cover no-repeat; opacity: 0.6;
+}
+.about-section::before, .writing-section::before, .digital-section::before { background-position: left top; }
 </style>
 </head>
 <body>
