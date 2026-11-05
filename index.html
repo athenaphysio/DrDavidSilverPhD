@@ -542,7 +542,7 @@ footer { background: var(--black-deep); color: var(--on-dark); padding: 60px 28p
 .path-grid--four { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 1100px) { .path-grid--four { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .path-grid--four { grid-template-columns: 1fr; } }
-.contact-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+.contact-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px; margin-top: 40px; }
 .contact-item { border: 1px solid rgba(155,28,28,0.30); border-radius: 22px; padding: 22px 24px; text-align: center; }
 .contact-item .booking-eyebrow { color: var(--crimson-light); }
 .contact-item a, .contact-item p { color: var(--white); font-size: 15px; }
@@ -1204,7 +1204,7 @@ footer { background: var(--black-deep); color: var(--on-dark); padding: 60px 28p
         <div class="contact-item"><div class="booking-eyebrow">Email</div><a href="mailto:David@drdavidsilverphd.com">David@drdavidsilverphd.com</a></div>
         <div class="contact-item"><div class="booking-eyebrow">Phone</div><a href="tel:+447793650569">07793 650 569</a></div>
         <div class="contact-item"><div class="booking-eyebrow">Clinics</div><p>Cobham · Richmond · Online</p></div>
-      </div>
+      <div class="contact-item"><div class="booking-eyebrow">New client</div><a href="https://athena-online-kappa.vercel.app/register" target="_blank" rel="noopener">Register here</a></div></div>
     </div>
   </section>
 </div>
